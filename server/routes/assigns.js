@@ -5,10 +5,15 @@ var router = express.Router();
 
 router.post('/', function(request, response, next){
   var input = request.body;
-  var newAssign = new Assignment({name: input.student_name}, {assignment_number: input.assignment_number}, {score: input.score}, {date_completed:input.date_completed});
+  var newAssign = new Assignment({
+    student_name: input.student_name,
+    assignment_number: input.assignment_number,
+    score: input.score,
+    date_completed:input.date_completed});
+
   newAssign.save(function(err){
     if(err) console.log('invalid entry', err);
-    response.send(newAssign.toJSON());
+    response.send(newAssign);
     next();
   });
 });
@@ -48,4 +53,3 @@ router.get('/thing/:id', function(request, response){
 
 
 module.exports = router;
-

@@ -1,17 +1,38 @@
 <!DOCTYPE html>
 
-<html>
+<html ng-app="assignmentApp">
   <head>
     <meta charset="utf-8">
     <title>Assignment Thing</title>
 
-    <script src="public/angular.js" type="text/javascript"></script>
-    <!-- <script src="/assets/scripts/client.js" type="text/javascript"></script> -->
+    <script src="angular.js" type="text/javascript"></script>
+    <script src="client/client.js" type="text/javascript"></script>
   </head>
 
   <body>
 
-    Generic Assignment Page
+    <div ng-controller="MainController">
+      <form assignmentEntry>
+          Name: <input type="text" ng-model="schoolwork.student_name" /><br />
+          Assignment Number: <input type="number" ng-model="schoolwork.assignment_number" /><br />
+          Score: <input type="number" ng-model="schoolwork.score" /><br />
+          Date Created: <input type="date" ng-model="schoolwork.date_completed" /><br />
+          <input type="submit" ng-click="add(schoolwork)" value="Save"/>
+      </form>
+      <div ng-repeat="work in schoolworks">
+
+        <ul>
+            <li> Name: {{work.student_name}}</li>
+            <li> Assignment Number: {{work.assignment_number}}</li>
+            <li> Score: {{work.score}}</li>
+            <li> Date Completed: {{work.date_completed}}</li>
+        </ul>
+
+      </div>
+
+    </div>
+
+
 
   </body>
 
