@@ -1,8 +1,7 @@
 var express = require('express');
-var router = express.Router();
-var path = require('path');
 var Assignment = require('../../models/assignment');
 var bodyParser = require('body-parser');
+var router = express.Router();
 
 router.post('/', function(request, response, next){
   var input = request.body;
@@ -24,5 +23,29 @@ router.get('/', function(request, response){
   });
 });
 
+router.get('/thing/:id', function(request, response){
+  console.log(request.params.id);
+    //If an ID has been passed in, find that single 'Thing'
+    if(request.params.id){
+      Thing.findById(request.params.id, function(err, user){
+        if(err){
+          console.log(err);
+        } else {
+        //Return single user
+          response.send(user);
+        }
+    });
+  } else { //Else if no ID has been passed in, return everything
+    Thing.find({}, function(err, users){
+      if(err){
+        console.log(err);
+      } else {
+        response.send(users);
+      }
+    });
+  }
+});
+
 
 module.exports = router;
+
