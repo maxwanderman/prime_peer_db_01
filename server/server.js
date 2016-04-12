@@ -6,11 +6,14 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
-var mongoURI = "mongodb://localhost:27017/assignments";
-var MongoDB = mongoose.connect(mongoURI).connection;
+var MongoDB = mongoose.connect('mongodb://localhost/assigns').connection;
+
+app.use(bodyParser.json());
 
 app.use('/', index);
 app.use('/all', assigns);
+
+app.use(express.static('server/public'));
 
 MongoDB.on('error', function (err) {
     console.log('mongodb connection error:', err);
@@ -23,4 +26,5 @@ MongoDB.once('open', function () {
 var server = app.listen(3000, function(){
   var port = server.address().port;
   console.log('Listening on port', port, 'Press ctrl-c to stop');
-})
+});
+
